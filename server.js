@@ -5,7 +5,6 @@ const PORT = 3000
 app.use(express.urlencoded({extended : true}));
 app.use(express.json());
 
-
 const character = [
     {
         name: "Yoda",
@@ -37,29 +36,29 @@ app.get("/", (req, res) => {
     res.send("MAY THE FORCE BE WITH YOU")
 })
 
-
 // api/characters  - show all character data.
 app.get(`/api/characters`, (req, res) => {
     res.json(character);
 })
 
-
 // /api/character/:routeName
 
-app.get(`/api/characters/:routeName`, (req, res)=>{
-  const target = req.params.routeName;
-  const char = character.find(characters => {
-    return characters.routeName === target
+app.get(`/api/characters/:routeName`, (req, res) => {
+    const target = req.params.routeName;
+    const char = character.find(characters => {
+        return characters.routeName === target
+    })
+    res.json(char)
 })
-res.json(char)
 
-})
-
+// adding new characeter
 app.post(`/api/characters/add`, (req, res) =>{
-   console.log(req.body)
-    res.end()
+    // console.log(req.body)
+    const newChar = req.body
+    newChar.routeName = newChar.name.replace(/ /g, "").toLowerCase()
+    character.push(newChar)
+    res.status(200).send()
 })
-
 
 app.listen(PORT, () => {
     console.log(`example app listening at http://localhost:${PORT}`)
