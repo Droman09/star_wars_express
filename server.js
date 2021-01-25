@@ -1,4 +1,5 @@
 const express = require("express")
+const path = require("path")
 const app = express();
 const PORT = 3000
 
@@ -32,13 +33,21 @@ const character = [
     }
 ]
 
+// html routes
 app.get("/", (req, res) => {
-    res.send("MAY THE FORCE BE WITH YOU")
+    res.sendFile(path.join(__dirname + `/views/index.html`))
+    
 })
 
 // api/characters  - show all character data.
 app.get(`/api/characters`, (req, res) => {
     res.json(character);
+})
+
+app.get("/add", (req, res) => {
+    
+    res.sendFile(path.join(__dirname + `/add`))
+
 })
 
 // /api/character/:routeName
