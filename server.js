@@ -45,8 +45,7 @@ app.get(`/api/characters`, (req, res) => {
 })
 
 app.get("/add", (req, res) => {
-    
-    res.sendFile(path.join(__dirname + `/add`))
+    res.sendFile(path.join(__dirname + `/views/add.html`))
 
 })
 
